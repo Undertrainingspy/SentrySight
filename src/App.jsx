@@ -1,37 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Header from "./Header.jsx";
+
+// Component Imports
 import AboutUs from "./AboutUs.jsx";
-import Hero from "./Hero.jsx";
-import FAQ from "./FAQ.jsx";
-import Blog from "./Blog.jsx";
-import Features from "./Features.jsx";
-import News from "./News.jsx";
-import Socials from "./Socials.jsx";
 import Contact from "./Contact.jsx";
-import Testimonials from "./Testimonials.jsx";
-import Questionnaire from "./Questionnaire.jsx";
 import Demo from "./Demo.jsx";
+import Features from "./Features.jsx";
+import Footer from "./Footer.jsx"; // Assuming Footer is a component (not included in the provided code)
+import Header from "./Header.jsx";
+import Hero from "./Hero.jsx";
+import News from "./News.jsx";
+import Pricing from "./Pricing.jsx";
+import Profile from "./Profile.jsx";
+import Questionnaire from "./Questionnaire.jsx";
 import Login from "./SignIn.jsx";
-import SignUp from "./SignUp.jsx"; // Changed to SignUp to match the component name
-import Pricing from './Pricing.jsx'; // Add this import
-import Profile from './Profile.jsx';
-import Questionnaire from './Questionnaire.jsx';
-import Login from './SignIn.jsx';
-import SignUp from './SignUp.jsx';
-import Socials from './Socials.jsx';
-import Testimonials from './Testimonials.jsx';
-import { ParallaxProvider } from 'react-scroll-parallax';
+import SignUp from "./SignUp.jsx";
+import Socials from "./Socials.jsx";
+import Testimonials from "./Testimonials.jsx";
 
 function App() {
   const [userEmail, setUserEmail] = useState(() => {
-    return localStorage.getItem('userEmail') || '';
+    return localStorage.getItem("userEmail") || "";
   });
 
   useEffect(() => {
     if (userEmail) {
-      localStorage.setItem('userEmail', userEmail);
+      localStorage.setItem("userEmail", userEmail);
     }
   }, [userEmail]);
 
@@ -46,16 +40,12 @@ function App() {
               element={
                 <>
                   <Hero />
-                  
                   {/* Parallax Section 1 */}
                   <div
                     className="parallax"
                     style={{ backgroundImage: `url('src/assets/Rifle.png')` }}
-                  >
-                  </div>
-
+                  ></div>
                   <Features />
-
                   {/* Parallax Section 2 */}
                   <div
                     className="parallax"
@@ -66,10 +56,8 @@ function App() {
                       <p>Check out our latest news and articles</p>
                     </div>
                   </div>
-
                   <News />
                   <Testimonials />
-                  <CTA />
                   <Contact />
                   <Socials />
                 </>
@@ -79,7 +67,10 @@ function App() {
             <Route path="/demo" element={<Demo />} />
             <Route path="/questionnaire" element={<Questionnaire />} />
             <Route path="/pricing" element={<Pricing />} />
-            <Route path="/sign-in" element={<Login setUserEmail={setUserEmail} />} />
+            <Route
+              path="/sign-in"
+              element={<Login setUserEmail={setUserEmail} />}
+            />
             <Route path="/sign-up" element={<SignUp />} />
             <Route
               path="/profile"
