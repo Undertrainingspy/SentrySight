@@ -1,5 +1,5 @@
 import React from 'react';
-import './blog.css';
+import './Blog.css';
 
 function Blog() {
   const posts = [
