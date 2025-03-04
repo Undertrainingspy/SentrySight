@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion"; // Import AnimatePresen
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import './header.css';
-import Logo from './assets/logo.png'; // Corrected import path
+import Logo from './assets/Logo.png'; // Corrected import path
 
 function Header({ userEmail }) {
   const [isOpen, setIsOpen] = useState(false);
