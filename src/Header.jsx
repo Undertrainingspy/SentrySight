@@ -1,27 +1,25 @@
-import { AnimatePresence, motion } from "framer-motion"; // Import AnimatePresence for transitions
+import { AnimatePresence, motion } from "framer-motion"; 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import './header.css';
-import Logo from './assets/Logo.png'; // Corrected import path
+// Remove the Logo import
 
 function Header({ userEmail }) {
   const [isOpen, setIsOpen] = useState(false);
   const [lightMode, setLightMode] = useState(false);
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
   const toggleTheme = () => {
     setLightMode(!lightMode);
-    document.body.classList.toggle("light-mode"); // Applies to whole page
+    document.body.classList.toggle("light-mode"); 
   };
-
   return (
     <header className={`header ${lightMode ? "light-mode" : ""}`}>
       <div className="logo">
         <Link to="/" className="logo-link">
-          <img src={Logo} alt="Logo" className="logo-image" />
+          {/* Use direct src path instead of import variable */}
+          <img src="/assets/Logo.png" alt="Logo" className="logo-image" />
           <h1>SentrySight</h1>
         </Link>
       </div>
@@ -32,7 +30,6 @@ function Header({ userEmail }) {
           <li className="nav-item"><Link className="nav-link" to="/faq">FAQ</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/questionnaire">Questionnaire</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/pricing">Pricing</Link></li>
-          {/* Conditionally render Register/Sign In or Profile */}
           <li className="nav-item">
             <Link className="nav-link" to={userEmail ? "/profile" : "/sign-in"}>
               {userEmail ? "Profile" : "Register / Sign In"}
@@ -46,7 +43,6 @@ function Header({ userEmail }) {
         <span className="line"></span>
         <span className="line"></span>
       </div>
-
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -57,7 +53,7 @@ function Header({ userEmail }) {
             transition={{ duration: 0.5 }}
           >
             <div className="back-arrow" onClick={toggleMenu}>
-              &#8592; {/* Left arrow symbol */}
+              &#8592;
             </div>
             <ul className="nav-list">
               <li className="nav-item"><Link className="nav-link" to="/about" onClick={toggleMenu}>About Us</Link></li>
@@ -67,7 +63,6 @@ function Header({ userEmail }) {
               <li className="nav-item"><Link className="nav-link" to="/questionnaire" onClick={toggleMenu}>Questionnaire</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/sign-in" onClick={toggleMenu}>Register / Sign In</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/admin">Admin</Link></li>
-
             </ul>
           </motion.div>
         )}
@@ -75,5 +70,4 @@ function Header({ userEmail }) {
     </header>
   );
 }
-
 export default Header;
