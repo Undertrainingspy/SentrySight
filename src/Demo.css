@@ -5,8 +5,8 @@
   --primary-light: #ff6f60;
   --primary-dark: #ab000d;
   --background-color: var(--darker-bg);
-  --surface-color: #1e1e1e;
-  --surface-color-light: #2d2d2d;
+  --surface-color: var(--dark-bg);
+  --surface-color-light: var(--dark-bg);
   --text-color: #FFFFFF;
   --text-color-secondary: #B3B3B3;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -19,7 +19,7 @@
   /* Rate limit colors */
   --warning-color: #ffb300;
   --error-color: #ff5252;
-  --darker-bg: #1E1E1E;
+  --darker-bg: var(--darker-bg);
 }
 
 /* Global Styling */

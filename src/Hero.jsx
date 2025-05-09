@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useTranslation } from "./context/TranslationContext"; // Import translation hook
+import { useTranslation } from "./context/TranslationContext";
+import rifleImage from "./assets/Rifle.jpg";
 import "./Hero.css";
 
 const Hero = () => {
@@ -25,8 +26,9 @@ const Hero = () => {
   }, [language, translateText]);
 
   return (
-    <div className="hero">
-      {/* Hero Content */}
+    <div className="hero" style={{ 
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${rifleImage})` 
+    }}>
       <motion.div className="hero-content">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
