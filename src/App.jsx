@@ -25,9 +25,6 @@ import Profile from "./Profile.jsx";
 import NotFound from "./404.jsx"; 
 import Admin from "./Admin.jsx";
 
-// Import the TranslationProvider
-import { TranslationProvider } from "./context/TranslationContext";
-
 import "./CSS.css";
 import "./App.css"; 
 
@@ -118,20 +115,17 @@ function App() {
     }
   }, [userEmail, isAdmin, clientEmail]);
 
-  // Wrap <Router> in <TranslationProvider>
   return (
-    <TranslationProvider>
-      <Router>
-        <AppContent 
-          userEmail={userEmail} 
-          setUserEmail={setUserEmail} 
-          isAdmin={isAdmin} 
-          setIsAdmin={setIsAdmin}
-          clientEmail={clientEmail}
-          setClientEmail={setClientEmail}
-        />
-      </Router>
-    </TranslationProvider>
+    <Router>
+      <AppContent 
+        userEmail={userEmail} 
+        setUserEmail={setUserEmail} 
+        isAdmin={isAdmin} 
+        setIsAdmin={setIsAdmin}
+        clientEmail={clientEmail}
+        setClientEmail={setClientEmail}
+      />
+    </Router>
   );
 }
 
