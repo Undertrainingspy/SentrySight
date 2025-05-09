@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import './news.css';
 
+// Import the images
+import newsNasaImage from './assets/news-nasa.jpg';
+import newsEfestImage from './assets/news-efest.jpg';
+import pic3Image from './assets/pic3.jpg';
+
 function News() {
   const [activeIndex, setActiveIndex] = useState(0);
   
@@ -10,19 +15,19 @@ function News() {
       title: "Top 9 in NASA MINDS Competition",
       date: "April 2025",
       description: "SentrySight was recognized in the NASA MINDS innovation competition, placing in the top 9 teams nationally for our AI-driven security technology.",
-      image: "/src/assets/news-nasa.jpg"
+      image: newsNasaImage
     },
     {
       title: "5th Place in eFest 2025 Schulze Challenge",
       date: "March 2025",
       description: "Our team secured 5th place at the prestigious eFest 2025 Schulze Entrepreneur Challenge, competing against innovative startups from across the country.",
-      image: "/src/assets/news-efest.jpg"
+      image: newsEfestImage
     },
     {
       title: "2nd Place in SunStone CSU Startup Launch",
       date: "February 2025",
       description: "SentrySight earned 2nd place in the SunStone CSU Startup Launch competition, receiving funding and mentorship to accelerate our growth.",
-      image: "/src/assets/pic3.jpg"
+      image: pic3Image
     }
   ];
 
