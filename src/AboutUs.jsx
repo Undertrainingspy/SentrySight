@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useTranslation } from "./context/TranslationContext";
 import "./AboutUs.css";
 
 function AboutUs() {

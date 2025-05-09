@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom"; 
 import { AnimatePresence, motion } from "framer-motion";
-import Logo from "./assets/Logo.png";
+import Logo from "./assets/Logo.jpg";
 import "./header.css";
 
 function Header({ userEmail, isAdmin }) {

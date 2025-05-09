@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./demo.css";
 import { motion } from "framer-motion";
-import { useTranslation } from "./context/TranslationContext";
+
 const ThumbUpIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
     <path d="M9 21h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.58 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2z" fill="none" stroke="currentColor" strokeWidth="2"/>
@@ -168,8 +168,6 @@ function Demo({ userEmail }) {
   const [result, setResult] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
-  const { translateText, language } = useTranslation();
-  const [translatedText, setTranslatedText] = useState({});
   const [rating, setRating] = useState(null); // null, 'like', or 'dislike'
   const [ratingFeedback, setRatingFeedback] = useState('');
   const navigate = useNavigate();
@@ -177,45 +175,6 @@ function Demo({ userEmail }) {
   // Add state for rate limit warning
   const [rateLimitWarning, setRateLimitWarning] = useState(null);
   const [usageInfo, setUsageInfo] = useState(null);
-
-  useEffect(() => {
-    async function updateTranslations() {
-      const texts = {
-        demoTitle: "SentrySight Demo",
-        demoDescription: "Experience the power of advanced security solutions with real-time monitoring and AI-powered insights.",
-        tryItNow: "Try It Now",
-        howItWorks: "How It Works",
-        howItWorksDesc: "Our system leverages cutting-edge AI technology to analyze images and provide actionable security insights in real-time.",
-        securityComparison: "Security Response Comparison",
-        securityComparisonDesc: "See how SentrySight's AI system dramatically improves response time compared to traditional security approaches.",
-        uploadTitle: "Upload an Image for Analysis",
-        uploadPlaceholder: "Please select a file to upload.",
-        uploadButton: "Upload Image",
-        uploading: "Uploading...",
-        running: "Running...",
-        fullAccess: "Unlock Full Access",
-        signUpNow: "Sign Up Now",
-        fullAccessDesc: "Sign up today to gain complete access to all features and benefits of SentrySight.",
-        loginRequired: "Please log in to experiment with our Demo function",
-        loginButtonText: "Go to Login",
-        rateResult: "How was the analysis?",
-        likeText: "Helpful",
-        dislikeText: "Not Helpful",
-        thankYouRating: "Thank you for your feedback!",
-        // Add rate limit translation strings
-        rateLimitExceeded: "Rate limit exceeded. You can only make 5 requests per minute.",
-        usageStatus: "Usage: {current}/{limit} requests - Resets in 1 minute"
-      };
-
-      const translated = {};
-      for (const key in texts) {
-        translated[key] = await translateText(texts[key], language);
-      }
-      setTranslatedText(translated);
-    }
-
-    updateTranslations();
-  }, [language, translateText]);
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -240,7 +199,7 @@ function Demo({ userEmail }) {
 
   const handleUpload = async () => {
     if (!file) {
-      alert(translatedText.uploadPlaceholder || "Please select a file to upload.");
+      alert("Please select a file to upload.");
       return;
     }
 
@@ -267,7 +226,7 @@ function Demo({ userEmail }) {
       if (!response.ok) {
         if (response.status === 429) {
           // Rate limit exceeded
-          setRateLimitWarning(translatedText.rateLimitExceeded || "Rate limit exceeded. You can only make 5 requests per minute.");
+          setRateLimitWarning("Rate limit exceeded. You can only make 5 requests per minute.");
           throw new Error("Rate limit exceeded");
         }
         throw new Error(`Upload failed with status: ${response.status}`);
@@ -302,8 +261,7 @@ function Demo({ userEmail }) {
   
   const handleRating = (type) => {
     setRating(type);
-    setRatingFeedback(translatedText.thankYouRating || "Thank you for your feedback!");// deal with ratings later
-        
+    setRatingFeedback("Thank you for your feedback!");
   };
 
   // Enhanced animations and transitions
@@ -330,14 +288,14 @@ function Demo({ userEmail }) {
               animate={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.8 }}
             >
-              {translatedText.demoTitle || "SentrySight Demo"}
+              SentrySight Demo
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              {translatedText.loginRequired || "Please log in to experiment with our Demo function"}
+              Please log in to experiment with our Demo function
             </motion.p>
             <motion.button 
               className="btn-primary" 
@@ -347,7 +305,7 @@ function Demo({ userEmail }) {
               transition={{ duration: 0.8, delay: 0.6 }}
               whileHover={{ scale: 1.05, boxShadow: "0 15px 25px rgba(229, 57, 53, 0.4)" }}
             >
-              {translatedText.loginButtonText || "Go to Login"}
+              Go to Login
             </motion.button>
           </div>
         </section>
@@ -366,14 +324,14 @@ function Demo({ userEmail }) {
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.8 }}
           >
-            {translatedText.demoTitle || "SentrySight Demo"}
+            SentrySight Demo
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            {translatedText.demoDescription || "Experience the power of advanced security solutions with real-time monitoring and AI-powered insights."}
+            Experience the power of advanced security solutions with real-time monitoring and AI-powered insights.
           </motion.p>
           <motion.a 
             href="#upload-section" 
@@ -383,7 +341,7 @@ function Demo({ userEmail }) {
             transition={{ duration: 0.8, delay: 0.6 }}
             whileHover={{ scale: 1.05, boxShadow: "0 15px 25px rgba(229, 57, 53, 0.4)" }}
           >
-            {translatedText.tryItNow || "Try It Now"}
+            Try It Now
           </motion.a>
         </div>
       </section>
@@ -395,13 +353,13 @@ function Demo({ userEmail }) {
             {...fadeIn}
             viewport={{ once: true }}
           >
-            {translatedText.howItWorks || "How It Works"}
+            How It Works
           </motion.h2>
           <motion.p 
             {...fadeInDelayed}
             viewport={{ once: true }}
           >
-            {translatedText.howItWorksDesc || "Our system leverages cutting-edge AI technology to analyze images and provide actionable security insights in real-time."}
+            Our system leverages cutting-edge AI technology to analyze images and provide actionable security insights in real-time.
           </motion.p>
         </div>
       </section>
@@ -413,13 +371,13 @@ function Demo({ userEmail }) {
             {...fadeIn}
             viewport={{ once: true }}
           >
-            {translatedText.securityComparison || "Security Response Comparison"}
+            Security Response Comparison
           </motion.h2>
           <motion.p 
             {...fadeInDelayed}
             viewport={{ once: true }}
           >
-            {translatedText.securityComparisonDesc || "See how SentrySight's AI system dramatically improves response time compared to traditional security approaches."}
+            See how SentrySight's AI system dramatically improves response time compared to traditional security approaches.
           </motion.p>
           
           <motion.div 
@@ -441,7 +399,7 @@ function Demo({ userEmail }) {
             {...fadeIn}
             viewport={{ once: true }}
           >
-            {translatedText.uploadTitle || "Upload an Image for Analysis"}
+            Upload an Image for Analysis
           </motion.h3>
           
           {/* Rate limit warning display */}
@@ -466,9 +424,7 @@ function Demo({ userEmail }) {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <p>
-                {(translatedText.usageStatus || "Usage: {current}/{limit} requests - Resets in 1 minute")
-                  .replace("{current}", usageInfo.current)
-                  .replace("{limit}", usageInfo.limit)}
+                Usage: {usageInfo.current}/{usageInfo.limit} requests - Resets in 1 minute
               </p>
               <div className="usage-bar-container">
                 <div 
@@ -508,10 +464,10 @@ function Demo({ userEmail }) {
             >
               {isUploading ? (
                 <>
-                  <span className="spinner"></span> {translatedText.uploading || "Uploading..."}
+                  <span className="spinner"></span> Uploading...
                 </>
               ) : (
-                translatedText.uploadButton || "Upload Image"
+                "Upload Image"
               )}
             </motion.button>
             
@@ -538,7 +494,7 @@ function Demo({ userEmail }) {
               transition={{ duration: 0.5 }}
             >
               {isProcessing ? 
-                translatedText.running || "Running..." : 
+                "Running..." : 
                 <>
                   <img src={result} alt="Server Processed Result" />
                   
@@ -550,7 +506,7 @@ function Demo({ userEmail }) {
                       transition={{ duration: 0.5, delay: 0.3 }}
                     >
                       <div className="rating-title">
-                        {translatedText.rateResult || "How was the analysis?"}
+                        How was the analysis?
                       </div>
                       <div className="rating-buttons">
                         <button 
@@ -559,7 +515,7 @@ function Demo({ userEmail }) {
                           disabled={rating !== null}
                         >
                           <span className="thumb-icon"><ThumbUpIcon /></span>
-                          <span className="btn-text">{translatedText.likeText || "Helpful"}</span>
+                          <span className="btn-text">Helpful</span>
                         </button>
                         <button 
                           className={`rating-btn dislike ${rating === 'dislike' ? 'selected' : ''}`}
@@ -567,7 +523,7 @@ function Demo({ userEmail }) {
                           disabled={rating !== null}
                         >
                           <span className="thumb-icon"><ThumbDownIcon /></span>
-                          <span className="btn-text">{translatedText.dislikeText || "Not Helpful"}</span>
+                          <span className="btn-text">Not Helpful</span>
                         </button>
                       </div>
                       <div className="rating-feedback">
@@ -590,15 +546,15 @@ function Demo({ userEmail }) {
             {...fadeIn}
             viewport={{ once: true }}
           >
-            <h2>{translatedText.fullAccess || "Unlock Full Access"}</h2>
-            <p>{translatedText.fullAccessDesc || "Sign up today to gain complete access to all features and benefits of SentrySight."}</p>
+            <h2>Unlock Full Access</h2>
+            <p>Sign up today to gain complete access to all features and benefits of SentrySight.</p>
             <motion.a 
               href="/sign-in" 
               className="btn-primary"
               whileHover={{ scale: 1.05, boxShadow: "0 15px 25px rgba(229, 57, 53, 0.4)" }}
               whileTap={{ scale: 0.95 }}
             >
-              {translatedText.signUpNow || "Sign Up Now"}
+              Sign Up Now
             </motion.a>
           </motion.div>
         </div>

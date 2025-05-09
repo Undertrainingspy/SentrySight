@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./FAQ.css";
-import { useTranslation } from "./context/TranslationContext"; // Import translation hook
 
 function FAQ() {
   const [activeIndex, setActiveIndex] = useState(null);
-  const { translateText, language } = useTranslation();
-  const [translatedText, setTranslatedText] = useState({
-    faqTitle: "Frequently Asked Questions",
-    questions: [],
-  });
 
   const questions = [
     {
@@ -38,52 +32,33 @@ function FAQ() {
     },
   ];
 
-  useEffect(() => {
-    async function updateTranslations() {
-      const translatedQuestions = await Promise.all(
-        questions.map(async (item) => ({
-          question: await translateText(item.question, language),
-          answer: await translateText(item.answer, language),
-        }))
-      );
-
-      setTranslatedText({
-        faqTitle: await translateText("Frequently Asked Questions", language),
-        questions: translatedQuestions,
-      });
-    }
-
-    updateTranslations();
-  }, [language, translateText]);
-
   const toggleAnswer = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
   };
 
   return (
     <section className="faq">
-      <h2>{translatedText.faqTitle || "Frequently Asked Questions"}</h2>
+      <h2>Frequently Asked Questions</h2>
       <ul>
-        {translatedText.questions.length > 0 &&
-          translatedText.questions.map((item, index) => (
-            <li key={index} className={`faq-item ${activeIndex === index ? "active" : ""}`}>
-              <div className="faq-question" onClick={() => toggleAnswer(index)}>
-                <strong>{item.question}</strong>
-                <span className="faq-icon">
-                  {activeIndex === index ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                      <path fillRule="evenodd" d="M8 1a1 1 0 0 1 1 1v6h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 0 1 0-2h6V2a1 1 0 0 1 1-1z" />
-                    </svg>
-                  ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                      <path fillRule="evenodd" d="M8 1a1 1 0 0 1 1 1v6h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 0 1 0-2h6V2a1 1 0 0 1 1-1z" />
-                    </svg>
-                  )}
-                </span>
-              </div>
-              {activeIndex === index && <p className="faq-answer">{item.answer}</p>}
-            </li>
-          ))}
+        {questions.map((item, index) => (
+          <li key={index} className={`faq-item ${activeIndex === index ? "active" : ""}`}>
+            <div className="faq-question" onClick={() => toggleAnswer(index)}>
+              <strong>{item.question}</strong>
+              <span className="faq-icon">
+                {activeIndex === index ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                    <path fillRule="evenodd" d="M8 1a1 1 0 0 1 1 1v6h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 0 1 0-2h6V2a1 1 0 0 1 1-1z" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                    <path fillRule="evenodd" d="M8 1a1 1 0 0 1 1 1v6h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 0 1 0-2h6V2a1 1 0 0 1 1-1z" />
+                  </svg>
+                )}
+              </span>
+            </div>
+            {activeIndex === index && <p className="faq-answer">{item.answer}</p>}
+          </li>
+        ))}
       </ul>
     </section>
   );
