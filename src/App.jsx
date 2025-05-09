@@ -26,7 +26,7 @@ import NotFound from "./404.jsx";
 import Admin from "./Admin.jsx";
 
 // Import the TranslationProvider
-import { TranslationProvider } from "/src/context/TranslationContext.jsx";
+import { TranslationProvider } from "./context/TranslationContext";
 
 import "./CSS.css";
 import "./App.css"; 
