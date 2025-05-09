@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Demo.css";
 import { motion } from "framer-motion";
+import videoBg from "./assets/videoBg.mp4";
 
 const ThumbUpIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -318,6 +319,19 @@ function Demo() {
           >
             Our system leverages cutting-edge AI technology to analyze images and provide actionable security insights in real-time.
           </motion.p>
+          
+          <motion.div
+            className="video-container"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <video autoPlay loop muted className="background-video">
+              <source src={videoBg} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </motion.div>
         </div>
       </section>
       
