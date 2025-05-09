@@ -1,30 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { useTranslation } from "./context/TranslationContext";
 import rifleImage from "./assets/Rifle.jpg";
 import "./Hero.css";
 
 const Hero = () => {
-  const { translateText, language } = useTranslation();
-  const [translatedText, setTranslatedText] = useState({});
-
-  useEffect(() => {
-    const texts = {
-      heading: "Experience Peace of Mind",
-      description: "Cutting-edge technology to keep your home and business safe.",
-    };
-
-    async function updateTranslations() {
-      const newTranslations = {};
-      for (const key in texts) {
-        newTranslations[key] = await translateText(texts[key]);
-      }
-      setTranslatedText(newTranslations);
-    }
-
-    updateTranslations();
-  }, [language, translateText]);
-
   return (
     <div className="hero" style={{ 
       backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${rifleImage})` 
@@ -35,14 +14,14 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4, ease: "easeOut" }}
         >
-          {translatedText.heading || "Experience Peace of Mind"}
+          Experience Peace of Mind
         </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.8, ease: "easeOut" }}
         >
-          {translatedText.description || "Cutting-edge technology to keep your home and business safe."}
+          Cutting-edge technology to keep your home and business safe.
         </motion.p>
         <div className="cta-buttons">
           <motion.a
