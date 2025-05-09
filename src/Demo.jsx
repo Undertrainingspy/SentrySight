@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Demo.css";
 import { motion } from "framer-motion";
 
@@ -161,7 +160,7 @@ const SecurityComparisonSVG = () => (
   </svg>
 );
 
-function Demo({ userEmail }) {
+function Demo() {
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -170,7 +169,6 @@ function Demo({ userEmail }) {
   const [progress, setProgress] = useState(0);
   const [rating, setRating] = useState(null); // null, 'like', or 'dislike'
   const [ratingFeedback, setRatingFeedback] = useState('');
-  const navigate = useNavigate();
   
   // Add state for rate limit warning
   const [rateLimitWarning, setRateLimitWarning] = useState(null);
@@ -254,10 +252,6 @@ function Demo({ userEmail }) {
       setIsProcessing(false);
     }
   };
-
-  const handleLoginRedirect = () => {
-    navigate('/sign-in');
-  };
   
   const handleRating = (type) => {
     setRating(type);
@@ -277,43 +271,6 @@ function Demo({ userEmail }) {
     transition: { duration: 0.8, delay: 0.3 }
   };
 
-  // Not logged in view with improved styling
-  if (!userEmail) {
-    return (
-      <div className="demo-container">
-        <section className="hero-section">
-          <div className="hero-content">
-            <motion.h1 
-              initial={{ opacity: 0, y: -30 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.8 }}
-            >
-              SentrySight Demo
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              Please log in to experiment with our Demo function
-            </motion.p>
-            <motion.button 
-              className="btn-primary" 
-              onClick={handleLoginRedirect}
-              initial={{ opacity: 0, scale: 0.9 }} 
-              animate={{ opacity: 1, scale: 1 }} 
-              transition={{ duration: 0.8, delay: 0.6 }}
-              whileHover={{ scale: 1.05, boxShadow: "0 15px 25px rgba(229, 57, 53, 0.4)" }}
-            >
-              Go to Login
-            </motion.button>
-          </div>
-        </section>
-      </div>
-    );
-  }
-
-  // Logged in view - enhanced demo functionality
   return (
     <div className="demo-container">
       {/* Hero Section with enhanced animations */}
@@ -364,7 +321,7 @@ function Demo({ userEmail }) {
         </div>
       </section>
       
-      {/* Security Response Comparison Section - ADDED */}
+      {/* Security Response Comparison Section */}
       <section className="security-comparison-section">
         <div className="content-wrapper">
           <motion.h2 
@@ -546,15 +503,15 @@ function Demo({ userEmail }) {
             {...fadeIn}
             viewport={{ once: true }}
           >
-            <h2>Unlock Full Access</h2>
-            <p>Sign up today to gain complete access to all features and benefits of SentrySight.</p>
+            <h2>Explore More Features</h2>
+            <p>Discover all the capabilities of SentrySight's advanced security monitoring system.</p>
             <motion.a 
-              href="/sign-in" 
+              href="#upload-section" 
               className="btn-primary"
               whileHover={{ scale: 1.05, boxShadow: "0 15px 25px rgba(229, 57, 53, 0.4)" }}
               whileTap={{ scale: 0.95 }}
             >
-              Sign Up Now
+              Try the Demo
             </motion.a>
           </motion.div>
         </div>

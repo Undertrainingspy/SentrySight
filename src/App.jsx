@@ -28,11 +28,24 @@ import Admin from "./Admin.jsx";
 import "./CSS.css";
 import "./App.css"; 
 
+// Add this ScrollToTop component
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+}
+
 function AppContent({ userEmail, setUserEmail, isAdmin, setIsAdmin, clientEmail, setClientEmail }) {
   const location = useLocation();
 
   return (
     <div className="App">
+      {/* Add the ScrollToTop component here */}
+      <ScrollToTop />
       <Header userEmail={userEmail} isAdmin={isAdmin} />
       <main className="main-content" style={{ marginTop: "80px" }}>
         <TransitionGroup>

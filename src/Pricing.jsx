@@ -322,9 +322,7 @@ const PricingPage = () => {
                   checked={isYearly}
                   onChange={() => setIsYearly(!isYearly)}
                 />
-                <span className="absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-[#2a2d3d] border border-[#444857] rounded-[34px] transition-all duration-400 before:absolute before:content-[''] before:h-[22px] before:w-[22px] before:left-1 before:bottom-[3px] before:bg-[#8B7DEE] before:rounded-full before:transition-all before:duration-400 before:transform" 
-                  style={{ transform: isYearly ? 'translateX(28px)' : 'translateX(0)' }}
-                />
+                <span className={`absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-[#2a2d3d] border border-[#444857] rounded-[34px] transition-all duration-400 before:absolute before:content-[''] before:h-[22px] before:w-[22px] before:left-1 before:bottom-[3px] before:bg-[#8B7DEE] before:rounded-full before:transition-all before:duration-400 ${isYearly ? 'before:translate-x-[28px]' : 'before:translate-x-0'}`} />
               </label>
               <span className="text-[#b0b0b0]">Yearly</span>
               <span className="bg-[#8B7DEE] text-white text-xs font-bold py-1 px-2 rounded-full ml-2">Save 35%</span>
