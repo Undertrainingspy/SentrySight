@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./demo.css";
+import "./Demo.css";
 import { motion } from "framer-motion";
 
 const ThumbUpIcon = () => (
